@@ -53,6 +53,7 @@
 		FF260F941E747F9800A26BA7 /* COMP2601A3_100999500UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COMP2601A3_100999500UITests.swift; sourceTree = "<group>"; };
 		FF260F961E747F9800A26BA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF260FA21E747FC900A26BA7 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		FF260FA41E74AA5900A26BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Localizable.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +316,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				70FF6ADE1E7492AF001D6EBC /* Base */,
+				FF260FA41E74AA5900A26BA7 /* en */,
 			);
 			name = Localizable.plist;
 			sourceTree = "<group>";

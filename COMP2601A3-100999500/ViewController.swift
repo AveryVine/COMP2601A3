@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     
     var gameThread: DispatchQueue?
     var timer: DispatchSourceTimer?
+    var listenersActive = true
     var game = Game()
     var xImage = UIImage(named: "x_button")
     var oImage = UIImage(named: "o_button")
@@ -44,15 +45,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startButtonOnClick() {
-        print("Start button clicked")
         if game.getActive() {
-            print("Ending current game")
             game.toggleActive()
             gameOverUI(winner: Game.EMPTY_VAL)
             toggleClickListeners()
         }
         else {
-            print("Starting new game")
             game = Game()
             prepareUI()
             toggleClickListeners()
@@ -61,7 +59,6 @@ class ViewController: UIViewController {
     }
     
     func gameLoop() {
-        print("In game loop")
         gameThread = DispatchQueue(label: "gameThread", attributes: .concurrent)
         timer?.cancel()
         let computerMoveTask = DispatchWorkItem() {
@@ -70,23 +67,24 @@ class ViewController: UIViewController {
                 self.timer = nil
             }
             let choice = self.game.randomSquare()
-            print("Computer made a choice")
             self.game.makeMove(choice: choice)
-            print("Computer made a move")
             DispatchQueue.main.sync {
                 self.updateSquareUI(choice: choice, playerTurn: self.game.getPlayerTurn())
                 self.updateDisplayTextView(choice: choice)
-                print("UI updated by computer")
             }
             let gameWinner = self.game.gameWinner()
-            print("Chose a winner: \(gameWinner)")
             if gameWinner == Game.EMPTY_VAL {
                 self.game.switchPlayer()
+                DispatchQueue.main.async {
+                    self.toggleClickListeners()
+                }
             }
             else {
                 self.game.toggleActive()
                 DispatchQueue.main.async {
                     self.gameOverUI(winner: gameWinner)
+                    self.timer?.cancel()
+                    self.timer = nil
                 }
             }
         }
@@ -99,7 +97,7 @@ class ViewController: UIViewController {
     
     func updateSquareUI(choice: Int, playerTurn: Int) {
         var image: UIImage?
-        if choice == Game.X_VAL {
+        if playerTurn == Game.X_VAL {
             image = xImage
         }
         else {
@@ -173,56 +171,46 @@ class ViewController: UIViewController {
     
     func gameOverUI(winner: Int) {
         if winner == Game.X_VAL {
-            
+            label?.text = "Game is over. You won!"
         }
         else if winner == Game.O_VAL {
-            
+            label?.text = "Game is over. Computer won!"
         }
         else if winner == Game.TIE_VAL {
-            
+            label?.text = "Game is over. No one won!"
         }
         else {
-            
+            label?.text = "Game ended."
         }
         button?.setTitle("Start", for: UIControlState.normal)
     }
     
     func toggleClickListeners() {
-        tile0?.isEnabled = !(tile0?.isEnabled)!
-        tile1?.isEnabled = !(tile1?.isEnabled)!
-        tile2?.isEnabled = !(tile2?.isEnabled)!
-        tile3?.isEnabled = !(tile3?.isEnabled)!
-        tile4?.isEnabled = !(tile4?.isEnabled)!
-        tile5?.isEnabled = !(tile5?.isEnabled)!
-        tile6?.isEnabled = !(tile6?.isEnabled)!
-        tile7?.isEnabled = !(tile7?.isEnabled)!
-        tile8?.isEnabled = !(tile8?.isEnabled)!
+        listenersActive = !listenersActive
+        tile0?.isEnabled = listenersActive
+        tile1?.isEnabled = listenersActive
+        tile2?.isEnabled = listenersActive
+        tile3?.isEnabled = listenersActive
+        tile4?.isEnabled = listenersActive
+        tile5?.isEnabled = listenersActive
+        tile6?.isEnabled = listenersActive
+        tile7?.isEnabled = listenersActive
+        tile8?.isEnabled = listenersActive
     }
     
     @IBAction func squareClicked(sender: UIButton) {
-        print("Suspending thread...")
         timer?.cancel()
-        print("Thread suspended")
+        timer = nil
         let choice = sender.tag
-        print("Choice is \(choice)")
         game.makeMove(choice: choice)
-        print("Made a move")
         updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
         updateDisplayTextView(choice: choice)
-        print("Updated the UI")
         let gameWinner = game.gameWinner()
-        print("Checked for a winner: \(gameWinner)")
         if gameWinner == Game.EMPTY_VAL {
-            print("No winner yet")
             game.switchPlayer()
-            print("Switched players")
-            timer = nil
-            print("Set thread to nil")
             gameLoop()
-            print("New Game loop started")
         }
         else {
-            print("Found a winner!")
             game.toggleActive()
             gameOverUI(winner: gameWinner)
         }
