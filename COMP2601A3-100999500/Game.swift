@@ -19,7 +19,7 @@ class Game {
     /*----------
      - Description: constructor for game
      ----------*/
-    func Game() {
+    init() {
         active = true;
         playerTurn = X_VAL
     }

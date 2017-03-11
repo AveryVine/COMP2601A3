@@ -21,6 +21,12 @@ class ViewController: UIViewController {
     @IBOutlet var tile8: UIButton?
     @IBOutlet var label: UILabel?
     @IBOutlet var button: UIButton?
+    
+    var gameThread: DispatchQueue?
+    var game = Game()
+    var xImage = UIImage(named: "x_button")
+    var oImage = UIImage(named: "o_button")
+    var emptyImage = UIImage(named: "empty_button")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +41,88 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startButtonOnClick() {
-        if true /*game.getActive()*/ {
-            /*game.toggleActive()*/
-            gameOverUI(winner: 0) /*gameOverUI(winner: EMPTY_VAL)*/
+        if game.getActive() {
+            game.toggleActive()
+            gameOverUI(winner: game.EMPTY_VAL)
             toggleClickListeners()
         }
         else {
-            
+            game = Game()
+            prepareUI()
+            toggleClickListeners()
+            gameLoop()
         }
+    }
+    
+    func gameLoop() {
+        gameThread = DispatchQueue(label: "gameThread", attributes: .concurrent)
+        gameThread?.async {
+            while self.game.getActive() {
+                sleep(2)
+                let choice = self.game.randomSquare()
+                self.game.makeMove(choice: choice)
+                DispatchQueue.main.sync {
+                    self.updateSquareUI(choice: choice, playerTurn: self.game.getPlayerTurn())
+                    self.updateDisplayTextView(choice: choice)
+                }
+                let gameWinner = self.game.gameWinner()
+                if gameWinner == self.game.EMPTY_VAL {
+                    self.game.switchPlayer()
+                }
+                else {
+                    self.game.toggleActive()
+                    DispatchQueue.main.async {
+                        self.gameOverUI(winner: gameWinner)
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateSquareUI(choice: Int, playerTurn: Int) {
+        var image: UIImage?
+        if choice == game.X_VAL {
+            image = xImage
+        }
+        else {
+            image = oImage
+        }
+        switch choice {
+        case 0:
+            tile0?.setImage(image, for: UIControlState.normal)
+            break
+        case 1:
+            tile1?.setImage(image, for: UIControlState.normal)
+            break
+        case 2:
+            tile2?.setImage(image, for: UIControlState.normal)
+            break
+        case 3:
+            tile3?.setImage(image, for: UIControlState.normal)
+            break
+        case 4:
+            tile4?.setImage(image, for: UIControlState.normal)
+            break
+        case 5:
+            tile5?.setImage(image, for: UIControlState.normal)
+            break
+        case 6:
+            tile6?.setImage(image, for: UIControlState.normal)
+            break
+        case 7:
+            tile7?.setImage(image, for: UIControlState.normal)
+            break
+        case 8:
+            tile8?.setImage(image, for: UIControlState.normal)
+            break
+        default:
+            print("Error setting button image")
+        }
+        
+    }
+    
+    func updateDisplayTextView(choice: Int) {
+        label?.text = "Button \(choice) pressed."
     }
     
     func initUI() {
@@ -50,14 +130,28 @@ class ViewController: UIViewController {
         label?.text = ("Press button to start!")
     }
     
+    func prepareUI() {
+        tile0?.setImage(emptyImage, for: UIControlState.normal)
+        tile1?.setImage(emptyImage, for: UIControlState.normal)
+        tile2?.setImage(emptyImage, for: UIControlState.normal)
+        tile3?.setImage(emptyImage, for: UIControlState.normal)
+        tile4?.setImage(emptyImage, for: UIControlState.normal)
+        tile5?.setImage(emptyImage, for: UIControlState.normal)
+        tile6?.setImage(emptyImage, for: UIControlState.normal)
+        tile7?.setImage(emptyImage, for: UIControlState.normal)
+        tile8?.setImage(emptyImage, for: UIControlState.normal)
+        button?.setTitle("Running", for: UIControlState.normal)
+        label?.text = ""
+    }
+    
     func gameOverUI(winner: Int) {
-        if winner == 1 { /*X_VAL*/
+        if winner == game.X_VAL {
             
         }
-        else if winner == 2 { /*O_VAL*/
+        else if winner == game.O_VAL {
             
         }
-        else if winner == 3 { /*TIE_VAL*/
+        else if winner == game.TIE_VAL {
             
         }
         else {
@@ -76,6 +170,24 @@ class ViewController: UIViewController {
         tile6?.isEnabled = !(tile6?.isEnabled)!
         tile7?.isEnabled = !(tile7?.isEnabled)!
         tile8?.isEnabled = !(tile8?.isEnabled)!
+    }
+    
+    @IBAction func squareClicked(sender: UIButton) {
+        gameThread?.suspend()
+        let choice = sender.tag
+        game.makeMove(choice: choice)
+        updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
+        updateDisplayTextView(choice: choice)
+        let gameWinner = game.gameWinner()
+        if gameWinner == game.EMPTY_VAL {
+            game.switchPlayer()
+            gameLoop()
+        }
+        else {
+            game.toggleActive()
+            gameOverUI(winner: gameWinner)
+        }
+        toggleClickListeners()
     }
 
 }
