@@ -10,15 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var imageView0: UIImageView?
-    @IBOutlet var imageView1: UIImageView?
-    @IBOutlet var imageView2: UIImageView?
-    @IBOutlet var imageView3: UIImageView?
-    @IBOutlet var imageView4: UIImageView?
-    @IBOutlet var imageView5: UIImageView?
-    @IBOutlet var imageView6: UIImageView?
-    @IBOutlet var imageView7: UIImageView?
-    @IBOutlet var imageView8: UIImageView?
+    @IBOutlet var tile0: UIButton?
+    @IBOutlet var tile1: UIButton?
+    @IBOutlet var tile2: UIButton?
+    @IBOutlet var tile3: UIButton?
+    @IBOutlet var tile4: UIButton?
+    @IBOutlet var tile5: UIButton?
+    @IBOutlet var tile6: UIButton?
+    @IBOutlet var tile7: UIButton?
+    @IBOutlet var tile8: UIButton?
     @IBOutlet var label: UILabel?
     @IBOutlet var button: UIButton?
 
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        initUI();
+        initUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         if true /*game.getActive()*/ {
             /*game.toggleActive()*/
             gameOverUI(winner: 0) /*gameOverUI(winner: EMPTY_VAL)*/
+            toggleClickListeners()
         }
         else {
             
@@ -63,6 +64,18 @@ class ViewController: UIViewController {
             
         }
         button?.setTitle("Start", for: UIControlState.normal)
+    }
+    
+    func toggleClickListeners() {
+        tile0?.isEnabled = !(tile0?.isEnabled)!
+        tile1?.isEnabled = !(tile1?.isEnabled)!
+        tile2?.isEnabled = !(tile2?.isEnabled)!
+        tile3?.isEnabled = !(tile3?.isEnabled)!
+        tile4?.isEnabled = !(tile4?.isEnabled)!
+        tile5?.isEnabled = !(tile5?.isEnabled)!
+        tile6?.isEnabled = !(tile6?.isEnabled)!
+        tile7?.isEnabled = !(tile7?.isEnabled)!
+        tile8?.isEnabled = !(tile8?.isEnabled)!
     }
 
 }
