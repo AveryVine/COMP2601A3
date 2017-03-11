@@ -14,6 +14,7 @@
 		FF260F7F1E747F9800A26BA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF260F7D1E747F9800A26BA7 /* LaunchScreen.storyboard */; };
 		FF260F8A1E747F9800A26BA7 /* COMP2601A3_100999500Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF260F891E747F9800A26BA7 /* COMP2601A3_100999500Tests.swift */; };
 		FF260F951E747F9800A26BA7 /* COMP2601A3_100999500UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF260F941E747F9800A26BA7 /* COMP2601A3_100999500UITests.swift */; };
+		FF260FA31E747FC900A26BA7 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF260FA21E747FC900A26BA7 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		FF260F901E747F9800A26BA7 /* COMP2601A3-100999500UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "COMP2601A3-100999500UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF260F941E747F9800A26BA7 /* COMP2601A3_100999500UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COMP2601A3_100999500UITests.swift; sourceTree = "<group>"; };
 		FF260F961E747F9800A26BA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF260FA21E747FC900A26BA7 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				FF260F741E747F9800A26BA7 /* AppDelegate.swift */,
 				FF260F761E747F9800A26BA7 /* ViewController.swift */,
+				FF260FA21E747FC900A26BA7 /* Game.swift */,
 				FF260F781E747F9800A26BA7 /* Main.storyboard */,
 				FF260F7B1E747F9800A26BA7 /* Assets.xcassets */,
 				FF260F7D1E747F9800A26BA7 /* LaunchScreen.storyboard */,
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF260F771E747F9800A26BA7 /* ViewController.swift in Sources */,
+				FF260FA31E747FC900A26BA7 /* Game.swift in Sources */,
 				FF260F751E747F9800A26BA7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
