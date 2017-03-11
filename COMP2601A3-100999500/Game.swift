@@ -10,6 +10,9 @@ import Foundation
 
 class Game {
     
+    //static final int X_VAL = 1, O_VAL = 2, TIE_WINNER = 3, EMPTY_VAL = 0;
+    static var X_VAL = 1, O_VAL = 2, TIE_WINNER = 3, EMPTY_VAL = 0
+    
     //private var board = [Int]()
     private var board = Array(repeating: 0, count: 9)
     private var playerTurn: Int
@@ -21,7 +24,7 @@ class Game {
      ----------*/
     init() {
         active = true;
-        playerTurn = X_VAL
+        playerTurn = Game.X_VAL
     }
     
     
@@ -38,7 +41,7 @@ class Game {
         var choice = -1;
         repeat {
             choice = Int(arc4random_uniform(UInt32(9)));
-        } while (board[choice] != EMPTY_VAL);
+        } while (board[choice] != Game.EMPTY_VAL);
         return choice;
     }
     
@@ -61,20 +64,20 @@ class Game {
      - Return: 1 (X wins), 2 (O wins), 3 (tie), or 0 (game not over)
      ----------*/
     func gameWinner() -> Int {
-        if (checkForRow(0, 1, 2)
-            || checkForRow(3, 4, 5)
-            || checkForRow(6, 7, 8)
-            || checkForRow(0, 3, 6)
-            || checkForRow(1, 4, 7)
-            || checkForRow(2, 5, 8)
-            || checkForRow(0, 4, 8)
-            || checkForRow(2, 4, 6)) {
+        if (checkForRow(square1: 0, square2: 1, square3: 2)
+            || checkForRow(square1: 3, square2: 4, square3: 5)
+            || checkForRow(square1: 6, square2: 7, square3: 8)
+            || checkForRow(square1: 0, square2: 3, square3: 6)
+            || checkForRow(square1: 1, square2: 4, square3: 7)
+            || checkForRow(square1: 2, square2: 5, square3: 8)
+            || checkForRow(square1: 0, square2: 4, square3: 8)
+            || checkForRow(square1: 2, square2: 4, square3: 6)) {
             return playerTurn;
         }
         for i in 0 ..< 9 {
-            if (board[i] == EMPTY_VAL) { return EMPTY_VAL; }
+            if (board[i] == Game.EMPTY_VAL) { return Game.EMPTY_VAL; }
         }
-        return TIE_WINNER;
+        return Game.TIE_WINNER;
     }
     
     
@@ -87,7 +90,7 @@ class Game {
     func checkForRow(square1: Int, square2: Int, square3: Int) -> Bool {
         if (board[square1] == board[square2]
         && board[square1] == board[square3]
-            && board[square1] != EMPTY_VAL) {
+            && board[square1] != Game.EMPTY_VAL) {
             return true;
         }
         return false;
@@ -101,7 +104,7 @@ class Game {
      - Return: none
      ----------*/
     func switchPlayer() {
-        playerTurn = (playerTurn == X_VAL ? O_VAL : X_VAL);
+        playerTurn = (playerTurn == Game.X_VAL ? Game.O_VAL : Game.X_VAL);
     }
     
     
@@ -112,7 +115,7 @@ class Game {
      - Return: occupied or not occupied
      ----------*/
     func squareOccupied(square: Int) -> Bool {
-        return (board[square] == EMPTY_VAL) ? false : true;
+        return (board[square] == Game.EMPTY_VAL) ? false : true;
     }
     
     
