@@ -49,8 +49,8 @@ class Game {
      - Input: choice of square
      - Return: none
      ----------*/
-    public void makeMove(int choice) {
-    board[choice] = playerTurn;
+    func makeMove(choice: Int) {
+        board[choice] = playerTurn;
     }
     
     
