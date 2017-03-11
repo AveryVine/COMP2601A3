@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     @IBAction func startButtonOnClick() {
         if game.getActive() {
             game.toggleActive()
-            gameOverUI(winner: game.EMPTY_VAL)
+            gameOverUI(winner: Game.EMPTY_VAL)
             toggleClickListeners()
         }
         else {
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
                     self.updateDisplayTextView(choice: choice)
                 }
                 let gameWinner = self.game.gameWinner()
-                if gameWinner == self.game.EMPTY_VAL {
+                if gameWinner == Game.EMPTY_VAL {
                     self.game.switchPlayer()
                 }
                 else {
@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     
     func updateSquareUI(choice: Int, playerTurn: Int) {
         var image: UIImage?
-        if choice == game.X_VAL {
+        if choice == Game.X_VAL {
             image = xImage
         }
         else {
@@ -145,13 +145,13 @@ class ViewController: UIViewController {
     }
     
     func gameOverUI(winner: Int) {
-        if winner == game.X_VAL {
+        if winner == Game.X_VAL {
             
         }
-        else if winner == game.O_VAL {
+        else if winner == Game.O_VAL {
             
         }
-        else if winner == game.TIE_VAL {
+        else if winner == Game.TIE_VAL {
             
         }
         else {
@@ -179,7 +179,7 @@ class ViewController: UIViewController {
         updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
         updateDisplayTextView(choice: choice)
         let gameWinner = game.gameWinner()
-        if gameWinner == game.EMPTY_VAL {
+        if gameWinner == Game.EMPTY_VAL {
             game.switchPlayer()
             gameLoop()
         }
