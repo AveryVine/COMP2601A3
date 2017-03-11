@@ -25,11 +25,44 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        initUI();
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func startButtonOnClick() {
+        if true /*game.getActive()*/ {
+            /*game.toggleActive()*/
+            gameOverUI(winner: 0) /*gameOverUI(winner: EMPTY_VAL)*/
+        }
+        else {
+            
+        }
+    }
+    
+    func initUI() {
+        button?.setTitle("Start", for: UIControlState.normal)
+        label?.text = ("Press button to start!")
+    }
+    
+    func gameOverUI(winner: Int) {
+        if winner == 1 { /*X_VAL*/
+            
+        }
+        else if winner == 2 { /*O_VAL*/
+            
+        }
+        else if winner == 3 { /*TIE_VAL*/
+            
+        }
+        else {
+            
+        }
+        button?.setTitle("Start", for: UIControlState.normal)
     }
 
 }
