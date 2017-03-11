@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "282C3767AB23813A8B32E4D1696DF94464AC9551",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7341F6B00F0D4483B21606A885A45E5F472CF689" : 9223372036854775807,
+    "282C3767AB23813A8B32E4D1696DF94464AC9551" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BE5CE016-2909-494B-BC6E-2BAA5D99D4CF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7341F6B00F0D4483B21606A885A45E5F472CF689" : "",
+    "282C3767AB23813A8B32E4D1696DF94464AC9551" : "COMP2601A3-100999500\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "COMP2601A3-100999500",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "COMP2601A3-100999500.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AveryVine\/COMP2601A3.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "282C3767AB23813A8B32E4D1696DF94464AC9551"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AveryVine\/COMP2601A3.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7341F6B00F0D4483B21606A885A45E5F472CF689"
+    }
+  ]
+}

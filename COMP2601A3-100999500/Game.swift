@@ -10,8 +10,7 @@ import Foundation
 
 class Game {
     
-    //static final int X_VAL = 1, O_VAL = 2, TIE_WINNER = 3, EMPTY_VAL = 0;
-    static var X_VAL = 1, O_VAL = 2, TIE_WINNER = 3, EMPTY_VAL = 0
+    static var X_VAL = 1, O_VAL = 2, TIE_VAL = 3, EMPTY_VAL = 0
     
     //private var board = [Int]()
     private var board = Array(repeating: 0, count: 9)
@@ -77,7 +76,7 @@ class Game {
         for i in 0 ..< 9 {
             if (board[i] == Game.EMPTY_VAL) { return Game.EMPTY_VAL; }
         }
-        return Game.TIE_WINNER;
+        return Game.TIE_VAL;
     }
     
     
