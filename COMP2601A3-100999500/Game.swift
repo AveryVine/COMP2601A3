@@ -10,7 +10,6 @@ import Foundation
 
 class Game {
     
-    //static final int X_VAL = 1, O_VAL = 2, TIE_WINNER = 3, EMPTY_VAL = 0;
     static var X_VAL = 1, O_VAL = 2, TIE_VAL = 3, EMPTY_VAL = 0
     
     //private var board = [Int]()
