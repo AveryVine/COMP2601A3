@@ -24,11 +24,11 @@ class ViewController: UIViewController, Observer {
     
     var gameThread: DispatchQueue?
     var timer: DispatchSourceTimer?
-    var listenersActive = true
     var game = Game()
     var xImage = UIImage(named: "x_button")
     var oImage = UIImage(named: "o_button")
     var emptyImage = UIImage(named: "empty_button")
+    let strings = Strings()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,19 +152,27 @@ class ViewController: UIViewController, Observer {
     }
     
     func updateDisplayTextView(choice: Int) {
-        label?.text = "Button \(choice) pressed."
+        if choice == 0 { label?.text = strings.square0 }
+        else if choice == 1 { label?.text = strings.square1 }
+        else if choice == 2 { label?.text = strings.square2 }
+        else if choice == 3 { label?.text = strings.square3 }
+        else if choice == 4 { label?.text = strings.square4 }
+        else if choice == 5 { label?.text = strings.square5 }
+        else if choice == 6 { label?.text = strings.square6 }
+        else if choice == 7 { label?.text = strings.square7 }
+        else if choice == 8 { label?.text = strings.square8 }
     }
     
     func initUI() {
-        button?.setTitle("Start", for: UIControlState.normal)
-        label?.text = ("Press button to start!")
+        button?.setTitle(strings.startButton_gameInactive, for: UIControlState.normal)
+        label?.text = strings.displayTextView_gameInactive
         wipeSquares()
     }
     
     func prepareUI() {
         wipeSquares()
-        button?.setTitle("Running", for: UIControlState.normal)
-        label?.text = ""
+        button?.setTitle(strings.startButton_gameActive, for: UIControlState.normal)
+        label?.text = strings.blank
     }
     
     func wipeSquares() {
@@ -181,31 +189,30 @@ class ViewController: UIViewController, Observer {
     
     func gameOverUI(winner: Int) {
         if winner == Game.X_VAL {
-            label?.text = "Game is over. You won!"
+            label?.text = strings.x_winner
         }
         else if winner == Game.O_VAL {
-            label?.text = "Game is over. Computer won!"
+            label?.text = strings.o_winner
         }
         else if winner == Game.TIE_VAL {
-            label?.text = "Game is over. No one won!"
+            label?.text = strings.tie_winner
         }
         else {
-            label?.text = "Game ended."
+            label?.text = strings.no_winner
         }
-        button?.setTitle("Start", for: UIControlState.normal)
+        button?.setTitle(strings.startButton_gameInactive, for: UIControlState.normal)
     }
     
     func toggleClickListeners() {
-        listenersActive = !listenersActive
-        tile0?.isEnabled = listenersActive
-        tile1?.isEnabled = listenersActive
-        tile2?.isEnabled = listenersActive
-        tile3?.isEnabled = listenersActive
-        tile4?.isEnabled = listenersActive
-        tile5?.isEnabled = listenersActive
-        tile6?.isEnabled = listenersActive
-        tile7?.isEnabled = listenersActive
-        tile8?.isEnabled = listenersActive
+        tile0?.isEnabled = !(tile0?.isEnabled)!
+        tile1?.isEnabled = !(tile1?.isEnabled)!
+        tile2?.isEnabled = !(tile2?.isEnabled)!
+        tile3?.isEnabled = !(tile3?.isEnabled)!
+        tile4?.isEnabled = !(tile4?.isEnabled)!
+        tile5?.isEnabled = !(tile5?.isEnabled)!
+        tile6?.isEnabled = !(tile6?.isEnabled)!
+        tile7?.isEnabled = !(tile7?.isEnabled)!
+        tile8?.isEnabled = !(tile8?.isEnabled)!
     }
     
     @IBAction func squareClicked(sender: UIButton) {
