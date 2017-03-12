@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7043F8431E75BA780000302A /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7043F8421E75BA780000302A /* Observer.swift */; };
 		FF15EBE11E75CA67000C1474 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF15EBE01E75CA67000C1474 /* Strings.swift */; };
+		FF15EBE31E75DEF0000C1474 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = FF15EBE21E75DEF0000C1474 /* README.txt */; };
 		FF260F751E747F9800A26BA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF260F741E747F9800A26BA7 /* AppDelegate.swift */; };
 		FF260F771E747F9800A26BA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF260F761E747F9800A26BA7 /* ViewController.swift */; };
 		FF260F7A1E747F9800A26BA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF260F781E747F9800A26BA7 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		7043F8421E75BA780000302A /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		FF15EBE01E75CA67000C1474 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		FF15EBE21E75DEF0000C1474 /* README.txt */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = README.txt; sourceTree = "<group>"; };
 		FF260F711E747F9800A26BA7 /* COMP2601A3-100999500.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COMP2601A3-100999500.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF260F741E747F9800A26BA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF260F761E747F9800A26BA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				FF260F741E747F9800A26BA7 /* AppDelegate.swift */,
 				FF260F761E747F9800A26BA7 /* ViewController.swift */,
+				FF15EBE21E75DEF0000C1474 /* README.txt */,
 				FF15EBE01E75CA67000C1474 /* Strings.swift */,
 				7043F8421E75BA780000302A /* Observer.swift */,
 				FF260FA21E747FC900A26BA7 /* Game.swift */,
@@ -246,6 +249,7 @@
 			files = (
 				FF260F7F1E747F9800A26BA7 /* LaunchScreen.storyboard in Resources */,
 				FF260F7C1E747F9800A26BA7 /* Assets.xcassets in Resources */,
+				FF15EBE31E75DEF0000C1474 /* README.txt in Resources */,
 				FF260F7A1E747F9800A26BA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
