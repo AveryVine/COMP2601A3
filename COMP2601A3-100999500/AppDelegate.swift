@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  COMP2601A3-100999500
 //
-//  Created by Avery Vine on 2017-03-11.
-//  Copyright © 2017 Avery Vine. All rights reserved.
+//  Created by Avery Vine (100999500) and Alexei Tipenko (100995947) on 2017-03-11.
+//  Copyright © 2017 Avery Vine and Alexei Tipenko. All rights reserved.
 //
 
 import UIKit
