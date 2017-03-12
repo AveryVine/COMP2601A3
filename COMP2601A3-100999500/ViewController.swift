@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, Observer {
     
     @IBOutlet var tile0: UIButton?
     @IBOutlet var tile1: UIButton?
@@ -44,6 +44,18 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func updateMove(choice: Int) {
+        updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
+        updateDisplayTextView(choice: choice)
+    }
+    
+    
+    func updateGameWinner(winner: Int) {
+        gameOverUI(winner: winner)
+    }
+    
+    
     @IBAction func startButtonOnClick() {
         if game.getActive() {
             game.toggleActive()
@@ -52,6 +64,7 @@ class ViewController: UIViewController {
         }
         else {
             game = Game()
+            self.game.attachObserver(observer: self)
             prepareUI()
             toggleClickListeners()
             gameLoop()
@@ -68,10 +81,12 @@ class ViewController: UIViewController {
             }
             let choice = self.game.randomSquare()
             self.game.makeMove(choice: choice)
+            /*
             DispatchQueue.main.sync {
                 self.updateSquareUI(choice: choice, playerTurn: self.game.getPlayerTurn())
                 self.updateDisplayTextView(choice: choice)
             }
+ */
             let gameWinner = self.game.gameWinner()
             if gameWinner == Game.EMPTY_VAL {
                 self.game.switchPlayer()
@@ -82,7 +97,7 @@ class ViewController: UIViewController {
             else {
                 self.game.toggleActive()
                 DispatchQueue.main.async {
-                    self.gameOverUI(winner: gameWinner)
+                    //self.gameOverUI(winner: gameWinner)
                     self.timer?.cancel()
                     self.timer = nil
                 }
@@ -134,7 +149,6 @@ class ViewController: UIViewController {
         default:
             print("Error setting button image")
         }
-        
     }
     
     func updateDisplayTextView(choice: Int) {
@@ -144,18 +158,16 @@ class ViewController: UIViewController {
     func initUI() {
         button?.setTitle("Start", for: UIControlState.normal)
         label?.text = ("Press button to start!")
-        tile0?.setImage(emptyImage, for: UIControlState.normal)
-        tile1?.setImage(emptyImage, for: UIControlState.normal)
-        tile2?.setImage(emptyImage, for: UIControlState.normal)
-        tile3?.setImage(emptyImage, for: UIControlState.normal)
-        tile4?.setImage(emptyImage, for: UIControlState.normal)
-        tile5?.setImage(emptyImage, for: UIControlState.normal)
-        tile6?.setImage(emptyImage, for: UIControlState.normal)
-        tile7?.setImage(emptyImage, for: UIControlState.normal)
-        tile8?.setImage(emptyImage, for: UIControlState.normal)
+        wipeSquares()
     }
     
     func prepareUI() {
+        wipeSquares()
+        button?.setTitle("Running", for: UIControlState.normal)
+        label?.text = ""
+    }
+    
+    func wipeSquares() {
         tile0?.setImage(emptyImage, for: UIControlState.normal)
         tile1?.setImage(emptyImage, for: UIControlState.normal)
         tile2?.setImage(emptyImage, for: UIControlState.normal)
@@ -165,8 +177,6 @@ class ViewController: UIViewController {
         tile6?.setImage(emptyImage, for: UIControlState.normal)
         tile7?.setImage(emptyImage, for: UIControlState.normal)
         tile8?.setImage(emptyImage, for: UIControlState.normal)
-        button?.setTitle("Running", for: UIControlState.normal)
-        label?.text = ""
     }
     
     func gameOverUI(winner: Int) {
@@ -203,16 +213,17 @@ class ViewController: UIViewController {
         timer = nil
         let choice = sender.tag
         game.makeMove(choice: choice)
-        updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
-        updateDisplayTextView(choice: choice)
+        //updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
+        //updateDisplayTextView(choice: choice)
         let gameWinner = game.gameWinner()
+
         if gameWinner == Game.EMPTY_VAL {
             game.switchPlayer()
             gameLoop()
         }
         else {
             game.toggleActive()
-            gameOverUI(winner: gameWinner)
+            //gameOverUI(winner: gameWinner)
         }
         toggleClickListeners()
     }

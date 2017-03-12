@@ -17,6 +17,8 @@ class Game {
     private var playerTurn: Int
     private var active: Bool
     
+    private var observerArray = [Observer]()
+    
     
     /*----------
      - Description: constructor for game
@@ -27,6 +29,24 @@ class Game {
     }
     
     
+    func attachObserver(observer : Observer){
+        observerArray.append(observer)
+        print(observer)
+        print(observerArray.count)
+    }
+    
+    
+    private func notifyMove(choice: Int) {
+        for observer in observerArray {
+            observer.updateMove(choice: choice)
+        }
+    }
+    
+    private func notifyGameWinner(winner: Int) {
+        for observer in observerArray {
+            observer.updateGameWinner(winner: winner)
+        }
+    }
     
     
     /*----------
@@ -53,6 +73,7 @@ class Game {
      ----------*/
     func makeMove(choice: Int) {
         board[choice] = playerTurn;
+        notifyMove(choice: choice)
     }
     
     
@@ -71,11 +92,15 @@ class Game {
             || checkForRow(square1: 2, square2: 5, square3: 8)
             || checkForRow(square1: 0, square2: 4, square3: 8)
             || checkForRow(square1: 2, square2: 4, square3: 6)) {
+            notifyGameWinner(winner: playerTurn)
             return playerTurn;
         }
         for i in 0 ..< 9 {
-            if (board[i] == Game.EMPTY_VAL) { return Game.EMPTY_VAL; }
+            if (board[i] == Game.EMPTY_VAL) {
+                return Game.EMPTY_VAL;
+            }
         }
+        notifyGameWinner(winner: Game.TIE_VAL)
         return Game.TIE_VAL;
     }
     
