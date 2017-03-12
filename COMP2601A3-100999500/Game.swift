@@ -12,7 +12,6 @@ class Game {
     
     static var X_VAL = 1, O_VAL = 2, TIE_VAL = 3, EMPTY_VAL = 0
     
-    //private var board = [Int]()
     private var board = Array(repeating: 0, count: 9)
     private var playerTurn: Int
     private var active: Bool
@@ -20,8 +19,11 @@ class Game {
     private var observerArray = [Observer]()
     
     
+    
     /*----------
-     - Description: constructor for game
+     - Description: constructor for the game
+     - Input: none
+     - Return: none
      ----------*/
     init() {
         active = true;
@@ -29,17 +31,36 @@ class Game {
     }
     
     
+    
+    /*----------
+     - Description: observable function that attaches an observer to the Game
+     - Input: the observer to be attached
+     - Return: none
+     ----------*/
     func attachObserver(observer : Observer){
         observerArray.append(observer)
     }
     
     
+    
+    /*----------
+     - Description: observable function that notifies all observers that a move was made
+     - Input: the position of the move
+     - Return: none
+     ----------*/
     private func notifyMove(choice: Int) {
         for observer in observerArray {
             observer.updateMove(choice: choice)
         }
     }
     
+    
+    
+    /*----------
+     - Description: observable function that notifies all observers that the game is over
+     - Input: the winner of the game
+     - Return: none
+     ----------*/
     private func notifyGameWinner(winner: Int) {
         for observer in observerArray {
             observer.updateGameWinner(winner: winner)
@@ -47,14 +68,13 @@ class Game {
     }
     
     
+    
     /*----------
-     - Description: select a random UNOCCUPIED square to make a move in
+     - Description: select a random unoccupied square to make a move in
      - Input: none
      - Return: the selected square
      ----------*/
     func randomSquare() -> Int {
-        //let diceRoll = Int(arc4random_uniform(UInt32(6)))
-        //var randInt = Int(arc4random_uniform(UInt32(9)));
         var choice = -1;
         repeat {
             choice = Int(arc4random_uniform(UInt32(9)));
@@ -144,6 +164,8 @@ class Game {
     
     /*----------
      - Description: getters
+     - Input: none
+     - Return: various properties of Game
      ----------*/
     func getPlayerTurn() -> Int { return playerTurn; }
     func getActive() -> Bool { return active; }
@@ -151,7 +173,9 @@ class Game {
     func getSquare(choice: Int) -> Int {return board[choice]; }
     
     /*----------
-     - Description: prints the current state of the board
+     - Description: prints the current state of the board (for debugging only)
+     - Input: none
+     - Return: none
      ----------*/
     func printBoard() {
         for i in 0 ..< 3 {

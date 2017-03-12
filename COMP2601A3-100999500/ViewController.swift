@@ -45,12 +45,24 @@ class ViewController: UIViewController, Observer {
     }
     
     
+    
+    /*----------
+     - Description: observer function that updates the UI when a move is made
+     - Input: the choice of move
+     - Return: none
+     ----------*/
     func updateMove(choice: Int) {
         updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
         updateDisplayTextView(choice: choice)
     }
     
     
+    
+    /*----------
+     - Description: observer function that updates the UI when the game ends
+     - Input: the winner of the game
+     - Return: none
+     ----------*/
     func updateGameWinner(winner: Int) {
         DispatchQueue.main.async {
             self.gameOverUI(winner: winner)
@@ -58,6 +70,12 @@ class ViewController: UIViewController, Observer {
     }
     
     
+    
+    /*----------
+     - Description: runs when the Start/Running button is clicked
+     - Input: none
+     - Return: none
+     ----------*/
     @IBAction func startButtonOnClick() {
         if game.getActive() {
             game.toggleActive()
@@ -73,6 +91,13 @@ class ViewController: UIViewController, Observer {
         }
     }
     
+    
+    
+    /*----------
+     - Description: creates and starts the game loop for the computer
+     - Input: none
+     - Return: none
+     ----------*/
     func gameLoop() {
         gameThread = DispatchQueue(label: "gameThread", attributes: .concurrent)
         timer?.cancel()
@@ -107,6 +132,13 @@ class ViewController: UIViewController, Observer {
         timer?.resume()
     }
     
+    
+    
+    /*----------
+     - Description: updates the UI based off the player's move
+     - Input: the position on the board, the current player
+     - Return: none
+     ----------*/
     func updateSquareUI(choice: Int, playerTurn: Int) {
         var image: UIImage?
         if playerTurn == Game.X_VAL {
@@ -148,6 +180,13 @@ class ViewController: UIViewController, Observer {
         }
     }
     
+    
+    
+    /*----------
+     - Description: updates the text view with the last move played
+     - Input: the position of the move
+     - Return: none
+     ----------*/
     func updateDisplayTextView(choice: Int) {
         if choice == 0 { label?.text = strings.square0 }
         else if choice == 1 { label?.text = strings.square1 }
@@ -160,18 +199,39 @@ class ViewController: UIViewController, Observer {
         else if choice == 8 { label?.text = strings.square8 }
     }
     
+    
+    
+    /*----------
+     - Description: sets the initial state for the UI when the program begins
+     - Input: none
+     - Return: none
+     ----------*/
     func initUI() {
         button?.setTitle(strings.startButton_gameInactive, for: UIControlState.normal)
         label?.text = strings.displayTextView_gameInactive
         wipeSquares()
     }
     
+    
+    
+    /*----------
+     - Description: prepares the UI for a new game
+     - Input: none
+     - Return: none
+     ----------*/
     func prepareUI() {
         wipeSquares()
         button?.setTitle(strings.startButton_gameActive, for: UIControlState.normal)
         label?.text = strings.blank
     }
     
+    
+    
+    /*----------
+     - Description: sets every square on the board to empty
+     - Input: none
+     - Return: none
+     ----------*/
     func wipeSquares() {
         tile0?.setImage(emptyImage, for: UIControlState.normal)
         tile1?.setImage(emptyImage, for: UIControlState.normal)
@@ -184,6 +244,13 @@ class ViewController: UIViewController, Observer {
         tile8?.setImage(emptyImage, for: UIControlState.normal)
     }
     
+    
+    
+    /*----------
+     - Description: displays the "Game Over" UI to the user
+     - Input: the winner of the game
+     - Return: none
+     ----------*/
     func gameOverUI(winner: Int) {
         if winner == Game.X_VAL {
             label?.text = strings.x_winner
@@ -200,6 +267,13 @@ class ViewController: UIViewController, Observer {
         button?.setTitle(strings.startButton_gameInactive, for: UIControlState.normal)
     }
     
+    
+    
+    /*----------
+     - Description: toggles on and off the squares' click listeners
+     - Input: none
+     - Return: none
+     ----------*/
     func toggleClickListeners() {
         tile0?.isEnabled = !(tile0?.isEnabled)!
         tile1?.isEnabled = !(tile1?.isEnabled)!
@@ -212,6 +286,13 @@ class ViewController: UIViewController, Observer {
         tile8?.isEnabled = !(tile8?.isEnabled)!
     }
     
+    
+    
+    /*----------
+     - Description: runs when a square on the board is clicked
+     - Input: the button that was pressed
+     - Return: none
+     ----------*/
     @IBAction func squareClicked(sender: UIButton) {
         timer?.cancel()
         timer = nil
