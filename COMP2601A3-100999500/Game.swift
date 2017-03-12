@@ -31,8 +31,6 @@ class Game {
     
     func attachObserver(observer : Observer){
         observerArray.append(observer)
-        print(observer)
-        print(observerArray.count)
     }
     
     

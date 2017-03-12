@@ -52,7 +52,9 @@ class ViewController: UIViewController, Observer {
     
     
     func updateGameWinner(winner: Int) {
-        gameOverUI(winner: winner)
+        DispatchQueue.main.async {
+            self.gameOverUI(winner: winner)
+        }
     }
     
     
@@ -80,13 +82,9 @@ class ViewController: UIViewController, Observer {
                 self.timer = nil
             }
             let choice = self.game.randomSquare()
-            self.game.makeMove(choice: choice)
-            /*
             DispatchQueue.main.sync {
-                self.updateSquareUI(choice: choice, playerTurn: self.game.getPlayerTurn())
-                self.updateDisplayTextView(choice: choice)
+                self.game.makeMove(choice: choice)
             }
- */
             let gameWinner = self.game.gameWinner()
             if gameWinner == Game.EMPTY_VAL {
                 self.game.switchPlayer()
@@ -97,7 +95,6 @@ class ViewController: UIViewController, Observer {
             else {
                 self.game.toggleActive()
                 DispatchQueue.main.async {
-                    //self.gameOverUI(winner: gameWinner)
                     self.timer?.cancel()
                     self.timer = nil
                 }
@@ -220,17 +217,13 @@ class ViewController: UIViewController, Observer {
         timer = nil
         let choice = sender.tag
         game.makeMove(choice: choice)
-        //updateSquareUI(choice: choice, playerTurn: game.getPlayerTurn())
-        //updateDisplayTextView(choice: choice)
         let gameWinner = game.gameWinner()
-
         if gameWinner == Game.EMPTY_VAL {
             game.switchPlayer()
             gameLoop()
         }
         else {
             game.toggleActive()
-            //gameOverUI(winner: gameWinner)
         }
         toggleClickListeners()
     }
