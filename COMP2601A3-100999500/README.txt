@@ -17,3 +17,10 @@ Operating instructions:
 1) Click Product --> Build For --> Running to ensure that the program is built for running and not testing
 2) Ensure that "COMP2601A3-100999500" is selected in the "COMP2601A3..." dropdown menu (on the top bar)
 3) Click the Run button on the top bar
+
+Notes on Computer AI:
+- The computer AI makes use of the minimax algorithm, which recursively assigns values to each potential end game
+- It assigns 10 points for a computer win, -10 points for a human win, and 0 points for a tie
+- It takes that score and bumps it down the stack until it reaches the actual current state of the board
+- It then chooses the move with the overall best total score
+- Credit to http://neverstopbuilding.com/minimax for the algorithm and explanation

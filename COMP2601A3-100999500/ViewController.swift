@@ -21,6 +21,7 @@ class ViewController: UIViewController, Observer {
     @IBOutlet var tile8: UIButton?
     @IBOutlet var label: UILabel?
     @IBOutlet var button: UIButton?
+    @IBOutlet var switchAI: UISwitch?
     
     var gameThread: DispatchQueue?
     var timer: DispatchSourceTimer?
@@ -106,11 +107,11 @@ class ViewController: UIViewController, Observer {
                 self.timer?.cancel()
                 self.timer = nil
             }
-            let choice = self.game.randomSquare()
+            let choice = self.game.randomSquare(switchAI: (self.switchAI?.isOn)!)
             DispatchQueue.main.sync {
                 self.game.makeMove(choice: choice)
             }
-            let gameWinner = self.game.gameWinner()
+            let gameWinner = self.game.gameWinner(currBoard: self.game.getBoard(), currPlayerTurn: self.game.getPlayerTurn())
             if gameWinner == Game.EMPTY_VAL {
                 self.game.switchPlayer()
                 DispatchQueue.main.async {
@@ -122,6 +123,9 @@ class ViewController: UIViewController, Observer {
                 DispatchQueue.main.async {
                     self.timer?.cancel()
                     self.timer = nil
+                    if self.game.getPlayerTurn() == Game.X_VAL {
+                        self.toggleClickListeners()
+                    }
                 }
             }
         }
@@ -223,6 +227,7 @@ class ViewController: UIViewController, Observer {
         wipeSquares()
         button?.setTitle(strings.startButton_gameActive, for: UIControlState.normal)
         label?.text = strings.blank
+        switchAI?.isEnabled = false
     }
     
     
@@ -265,6 +270,7 @@ class ViewController: UIViewController, Observer {
             label?.text = strings.no_winner
         }
         button?.setTitle(strings.startButton_gameInactive, for: UIControlState.normal)
+        switchAI?.isEnabled = true
     }
     
     
@@ -298,7 +304,7 @@ class ViewController: UIViewController, Observer {
         timer = nil
         let choice = sender.tag
         game.makeMove(choice: choice)
-        let gameWinner = game.gameWinner()
+        let gameWinner = game.gameWinner(currBoard: game.getBoard(), currPlayerTurn: game.getPlayerTurn())
         if gameWinner == Game.EMPTY_VAL {
             game.switchPlayer()
             gameLoop()

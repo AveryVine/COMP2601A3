@@ -108,12 +108,24 @@
                                     <action selector="squareClickedWithSender:" destination="BYZ-38-t0r" eventType="touchDown" id="pLu-aB-bsa"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cGv-jC-r8J">
+                                <rect key="frame" x="162" y="587" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Computer AI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUY-6a-5bT">
+                                <rect key="frame" x="139" y="626" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="button" destination="Qh9-sL-CFs" id="dVy-xw-Tnu"/>
                         <outlet property="label" destination="qww-MP-pTg" id="sL0-G7-eGe"/>
+                        <outlet property="switchAI" destination="cGv-jC-r8J" id="KiL-bM-en3"/>
                         <outlet property="tile0" destination="Q4O-4W-5o9" id="wGD-dg-dTL"/>
                         <outlet property="tile1" destination="iTL-6l-5LS" id="WUl-DR-bkI"/>
                         <outlet property="tile2" destination="CX9-99-hyt" id="yD0-vi-1fh"/>
