@@ -79,9 +79,13 @@ class ViewController: UIViewController, Observer {
      ----------*/
     @IBAction func startButtonOnClick() {
         if game.getActive() {
+            timer?.cancel()
+            timer = nil
             game.toggleActive()
             gameOverUI(winner: Game.EMPTY_VAL)
-            toggleClickListeners()
+            if game.getPlayerTurn() == Game.X_VAL {
+                toggleClickListeners()
+            }
         }
         else {
             game = Game()
